@@ -47,6 +47,8 @@ next-env.d.ts
 *.db-wal
 *.sqlite
 *.sqlite3
+*.sql
+/better-aut-migrations/*.sql
 
 # better-auth migrations are auto-generated; keep them if you want a reproducible
 # schema history, but ignore the actual DB files above.

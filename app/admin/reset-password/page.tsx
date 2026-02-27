@@ -1,7 +1,7 @@
 'use client';
 
 import { authClient } from "@/lib/auth-client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -17,7 +17,6 @@ import { Label } from "@/components/ui/label";
 import React from 'react'
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { set } from "better-auth";
 import { Quicksand } from "next/font/google";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Check, CheckCircle2Icon, InfoIcon } from "lucide-react";
@@ -27,7 +26,7 @@ import Logo from "../../../public/img/home-logo.png";
 const quicksand = Quicksand({ subsets: ['latin'] });
 
 
-const page = () => {
+function ResetPasswordForm() {
     const [password, setPassword] = useState("");
     const searchParams = useSearchParams();
     const [loading, setLoading] = useState(false);
@@ -97,14 +96,6 @@ const page = () => {
 
     }
 
-    if (!token && !error) {
-        return (
-            <div className="min-h-screen flex items-center justify-center">
-                <p className="text-gray-500">Loading...</p>
-            </div>
-        );
-    }
-
     return (
         <div className={`${quicksand.className} bg-[#F8F6F5]`}>
             <Image src={HomeVector} alt="Home Vector" width={300} height={60} className="absolute top-0 left-0 z-0 pointer-events-none" />
@@ -167,4 +158,10 @@ const page = () => {
     )
 }
 
-export default page;
+export default function Page() {
+    return (
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><p className="text-gray-500">Loading...</p></div>}>
+            <ResetPasswordForm />
+        </Suspense>
+    );
+}
