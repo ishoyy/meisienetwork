@@ -1,0 +1,11 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "waitlist",
+            "group": "mySubmissions",
+            "database": "watilist.db"
+        }
+    ]
+}
