@@ -1,13 +1,10 @@
 import { createAuthClient } from "better-auth/react"
 
-// Point the client at the Next.js auth handler route. If you set
-// NEXT_PUBLIC_BASE_URL (for example in production), it will be used as the
-// origin. Otherwise we use a relative path which works in the browser.
-const base = process.env.NEXT_PUBLIC_BASE_URL || ""
-const authBaseURL = `${base}/admin/api/auth`
-
+// Use a relative path so it always points to the same origin the browser
+// is on — works in both local dev and any deployed environment without
+// needing NEXT_PUBLIC_BASE_URL to be baked in at build time.
 export const authClient = createAuthClient({
-    baseURL: authBaseURL,
+    baseURL: "/admin/api/auth",
 })
 
 export const { signIn, signUp, useSession, signOut, requestPasswordReset, getSession} = authClient
