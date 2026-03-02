@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/data/db";
+export const runtime = "nodejs";
 
 function dbRun(sql: string, params: unknown[]): Promise<void> {
   return new Promise((resolve, reject) => {
