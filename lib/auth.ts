@@ -2,11 +2,14 @@ import { betterAuth } from "better-auth";
 import Database from "better-sqlite3";
 import { getResetPasswordEmailHtml } from "./email-template";
 import { FROM_EMAIL, resend } from "./resend";
+import BetterSqlite3 from "better-sqlite3";
 import path from "path";
 export function getDb() {
-  return new Database(process.env.DB_PATH || path.join(process.cwd(), "lib", "data", "sqlite.db"));
+    const dbPath = process.env.DB_PATH || path.join(process.cwd(), "lib", "data", "sqlite.db");
+    return new BetterSqlite3(dbPath);
 }
-export const auth = betterAuth({
+function createAuth(){
+ return betterAuth({
     database: getDb(),
     emailAndPassword: {
         enabled: true,
@@ -43,3 +46,6 @@ export const auth = betterAuth({
 
     },
 })
+}
+
+export const auth = createAuth();
