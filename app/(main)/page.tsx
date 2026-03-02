@@ -3,7 +3,7 @@ import "../styles/styles.css"
 import ScrollHandler from "../../public/components/ScrollHandler";
 import MenuHandler from "../../public/components/MenuClient";
 import { NextResponse } from "next/server";
-import { db } from "@/lib/data/db";
+import { getDb } from "@/lib/data/db";
 import Waitlist from "../../public/components/Waitlist";
 export default function Home() {
   
