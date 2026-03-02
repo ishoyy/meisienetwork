@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
-import { db } from "@/lib/data/db";
+import { getDb } from "@/lib/data/db";
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+const db = getDb();
 
 function dbRun(sql: string, params: unknown[]): Promise<void> {
   return new Promise((resolve, reject) => {
