@@ -1,10 +1,19 @@
 import { createAuthClient } from "better-auth/react"
 
-// Use a relative path so it always points to the same origin the browser
-// is on — works in both local dev and any deployed environment without
-// needing NEXT_PUBLIC_BASE_URL to be baked in at build time.
+// During SSR/prerendering (build time), window is undefined so we need a full URL.
+// In the browser, a relative path works fine.
+// NEXT_PUBLIC_BASE_URL must be set in Coolify as a build arg too.
+const getBaseURL = () => {
+    if (typeof window !== "undefined") {
+        // Browser — use relative path, always correct regardless of domain
+        return `${window.location.origin}/admin/api/auth`;
+    }
+    // Server/build time — must be a full URL
+    return `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/admin/api/auth`;
+};
+
 export const authClient = createAuthClient({
-    baseURL: "/admin/api/auth",
+    baseURL: getBaseURL(),
 })
 
-export const { signIn, signUp, useSession, signOut, requestPasswordReset, getSession} = authClient
+export const { signIn, signUp, useSession, signOut, requestPasswordReset, getSession } = authClient
