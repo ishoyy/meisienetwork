@@ -68,6 +68,7 @@ const LoginForm = () => {
       }
     } catch (err) {
       setError("Failed to sign in");
+      console.log("Login error:", err);
     } finally {
       setLoading(false);
     }
