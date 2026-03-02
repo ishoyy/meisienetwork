@@ -21,6 +21,9 @@ export function getDb() {
 function createAuth() {
     return betterAuth({
         database: getDb(),
+        trustedOrigins: [
+            process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000",
+        ],
         emailAndPassword: {
             enabled: true,
             sendResetPassword: async ({ user, token }) => {
