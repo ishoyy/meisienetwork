@@ -1,0 +1,2 @@
+[start]
+cmd = "mkdir -p /app/lib/data && npm run start"

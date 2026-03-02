@@ -2,8 +2,9 @@ import { betterAuth } from "better-auth";
 import Database from "better-sqlite3";
 import { getResetPasswordEmailHtml } from "./email-template";
 import { FROM_EMAIL, resend } from "./resend";
+import path from "path";
 export const auth = betterAuth({
-    database: new Database(process.env.DB_PATH || "./sqlite.db"),
+    database: new Database(process.env.DB_PATH || path.join(process.cwd(), "lib", "data", "sqlite.db")),
     emailAndPassword: {
         enabled: true,
 
