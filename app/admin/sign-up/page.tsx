@@ -52,14 +52,14 @@ const page = () => {
             });
 
             if (result.error){
-                setError(result.error.message || "Failed to sign up");
+                console.log("Error signing up:", result.error);
             } else {
                setTimeout(() => {
                     router.push("/admin/login");
                 }, 2000);
             }
         }catch(err){
-            setError("Failed to sign up");
+            console.log("Error signing up:", err);
         } finally{
         setLoading(false);
         }
@@ -137,6 +137,7 @@ const page = () => {
                     </CardFooter>
                 </Card>
             </div>
+            
         </div>
     )
 }
