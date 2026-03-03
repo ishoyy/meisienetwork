@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Quicksand } from 'next/font/google';
-import Logo from "/img/home-logo.png";
+import Logo from "../../..public/img/home-logo.png";
 import Image from "next/image";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
