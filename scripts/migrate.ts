@@ -18,7 +18,6 @@ async function migrate() {
         }
 
         console.log("Tables to be created:", toBeCreated.map(t => t.table));
-        console.log("Columns to be added:", toBeAdded.map(c => `${c.table}.${c.column}`));
         
         await runMigrations();
         console.log("✓ Migrations complete");
