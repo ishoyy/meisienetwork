@@ -1,13 +1,12 @@
 import { config } from "dotenv";
 import path from "path";
 
-// Load .env before importing anything that reads env vars
-config({ path: path.join(process.cwd(), ".env") });
 
 import { getMigrations } from "better-auth/db";
 import { auth } from "../lib/auth";
 
 async function migrate() {
+    console.log("Database Path detected as:", process.env.DB_PATH);
     try {
         console.log("Running better-auth migrations...");
         const { toBeCreated, toBeAdded, runMigrations } = await getMigrations(auth.options);

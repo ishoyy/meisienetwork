@@ -15,6 +15,7 @@ export function getDb() {
     
     const dir = path.dirname(dbPath);
     if (!fs.existsSync(dir)) {
+        console.log("Creating database directory...");
         fs.mkdirSync(dir, { recursive: true });
     }
 

@@ -46,17 +46,20 @@ const LoginForm = () => {
     try {
       const result = await authClient.signIn.email({
         email,
-        password
+        password,
+        fetchOptions: {
+          onSuccess: () => {
+            // Refresh router cache so session cookie is recognised
+            // before navigating to dashboard
+            router.refresh();
+            router.push("/admin/dashboard");
+          },
+          onError: (ctx) => {
+            setError(ctx.error.message || "Failed to sign in");
+            setLoading(false);
+          }
+        }
       });
-
-      if (result.error) {
-        setError(result.error.message || "Failed to sign in");
-        setLoading(false);
-      } else {
-        // Keep loading true so button stays disabled during redirect
-        setSuccess(true);
-        router.push("/admin/dashboard");
-      }
     } catch (err) {
       setError("Failed to sign in");
       console.log("Login error:", err);

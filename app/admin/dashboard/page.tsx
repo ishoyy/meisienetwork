@@ -167,7 +167,7 @@ export default function SubmissionsDashboard() {
                       <td className="px-4 py-3">
                         <Button 
                           onClick={() => handleDelete(s.id)} 
-                          className="rounded-full bg-red-500 text-white px-4 py-2 text-xs font-semibold hover:bg-red-600 transition-all"
+                          className="rounded-full text-red-500 px-4 py-2 text-xs font-semibold hover:bg-red-600 transition-all"
                           disabled={deletingId === s.id}
                         >
                           {deletingId === s.id ? "Deleting..." : "Delete"}
