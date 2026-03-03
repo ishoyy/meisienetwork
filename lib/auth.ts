@@ -40,6 +40,7 @@ function createAuth() {
                     console.log("Resend response", { data, error });
                 } catch (error) {
                     console.error("Error sending password reset email:", error);
+                    alert("Failed to send reset password email." + (error instanceof Error ? error.message : ""));
                     throw new Error("Failed to send reset password email");
                 }
             }
