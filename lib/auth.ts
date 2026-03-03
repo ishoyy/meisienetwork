@@ -34,9 +34,7 @@ function createAuth() {
         database: getDb(),
         trustedOrigins: [appBase],
         baseURL: appBase,
-        databaseHooks: {
-            runMigrations: true, 
-        },
+       
          advanced: {
             useSecureCookies: isProduction,
             cookiePrefix: "meisie",
