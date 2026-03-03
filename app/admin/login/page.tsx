@@ -2,6 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button"
+import WomanVector from "../../../public/img/womanvector.png";
+import BGVector from "../../../public/img/communities-bg-vector.png";
+import Blob from "../../../public/img/communities-vector-blob.png";
 import {
   Card,
   CardAction,
@@ -25,6 +28,8 @@ import { FaHome } from "react-icons/fa";
 import HomeVector from "../../../public/img/home-vector.png";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Check, CheckCircle2Icon, InfoIcon } from "lucide-react";
+import { RiAdminFill } from "react-icons/ri";
+
 
 const quicksand = Quicksand({ subsets: ['latin'] });
 import React from 'react'
@@ -66,15 +71,19 @@ const LoginForm = () => {
 
   return (
     <div className={`${quicksand.className} bg-[#F8F6F5]`}>
-      
+
+      <div className="w-full h-full fixed">
+      <Image 
+        src={BGVector}
+        alt="Background Vector"
+        layout="fill"
+        objectFit="cover"
+        className="   -z-20"
+      />
+      </div>
+
       <div className="relative">
-        <Image
-          src={HomeVector}
-          alt="Home Vector"
-          width={800}
-          height={800}
-          className="object-cover absolute w-[20%] h-auto top-0 left-0"
-        />
+     
         <div className="flex flex-row items-center gap-2 absolute top-10 left-15 z-10">
           <FaHome
             className="left-6 text-[#4B2E38] hover:text-gray-900 cursor-pointer"
@@ -84,20 +93,18 @@ const LoginForm = () => {
           <Link href="/" className={`${quicksand.className} font-semibold text-xl text-[#4B2E38] hover:text-[#4B2E38] visited:text-[#4B2E38]`}>Back to Home</Link>
         </div>
       </div>
+                  <Image src={Blob} alt="Decorative Blob" width={300} height={300} className=" absolute z-3 inset-34 " />
+
       <div className="min-h-screen flex items-center justify-center p-6">
+        
         {/* Shared rounded container with image on the left and form on the right */}
         <div className="flex w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden">
           {/* Left: decorative image with overlay text - hide on very small screens */}
           <div className="hidden md:flex md:w-[70%] lg:w-[70%] relative overflow-hidden">
-            <Image
-              src={AbstractBG}
-              alt="Background"
-              width={800}
-              height={800}
-              className="object-cover w-full h-full"
-            />
+            <div className="object-cover w-full h-full bg-white"></div>
+          
             {/* Overlay text on top of image */}
-            <div className={`absolute inset-0 flex flex-col items-center justify-center bg-[#4B2E38]/30 text-white text-center p-6 ${quicksand.className}`}>
+            <div className={`absolute inset-0 flex flex-col items-center justify-center text-white text-center p-6 ${quicksand.className}`}>
               <Image
                 src={Logo}
                 alt="Logo"
@@ -105,23 +112,31 @@ const LoginForm = () => {
                 height={100}
                 className="object-cover absolute top-6 left-6 z-10"
               />
-              <h2 className="text-3xl font-bold mb-4">Welcome</h2>
-              <p className="text-lg">Sign in to access your admin dashboard.</p>
+              {/* WomanVector centered on top of background */}
+              <Image
+                src={WomanVector}
+                alt="Woman Vector"
+                width={300}
+                height={300}
+                className="object-contain absolute left-1/2 -translate-x-1/2 z-10"
+              />
+             
             </div>
+            <div className="absolute inset-0 flex flex-col  justify-end text-[#4B2E38] text-center p-6 z-20">
+             <h2 className="text-3xl font-bold mb-4 z-20 ">Welcome</h2>
+              <p className="text-lg font-semibold z-20 ">Sign in to access your admin dashboard.</p>
+              </div>
           </div>
 
           {/* Right: sign-in card */}
-          <div className="w-full md:w-1/2 lg:w-3/5 p-8 flex flex-col items-center justify-center">
+          <div className="w-full md:w-1/2 lg:w-3/5 p-8 flex flex-col items-center justify-center z-10 bg-white">
             <Card className="w-full max-w-md shadow-none bg-transparent border-none">
-              <Image
-                src={AdminIcon}
-                alt="Admin Icon"
-                width={80}
-                height={80}
-                className="object-cover w-[20%] h-full justify-center flex self-center"
-              />
+              <div className="flex justify-center flex-col items-center">
+                <RiAdminFill className="text-[#4B2E38] mb-4" size={40}></RiAdminFill>
+                                <CardTitle className="text-xl font-semibold">Admin</CardTitle>
+
+              </div>
               <CardHeader className="text-center">
-                <CardTitle className="text-2xl font-semibold">Admin</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <form onSubmit={handleSubmit} className="space-y-4">

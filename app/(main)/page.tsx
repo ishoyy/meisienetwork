@@ -2,9 +2,8 @@ import Image from "next/image";
 import "../styles/styles.css"
 import ScrollHandler from "../../public/components/ScrollHandler";
 import MenuHandler from "../../public/components/MenuClient";
-import { NextResponse } from "next/server";
-import { getDb } from "@/lib/data/db";
 import Waitlist from "../../public/components/Waitlist";
+import HomeImg from "../../public/img/home-img.png";
 export default function Home() {
   
   return (
@@ -12,7 +11,7 @@ export default function Home() {
       <ScrollHandler />
       <MenuHandler />
       <div className="App">
-        <img className="mobile-logo" src="../img/home-logo.png" alt="Logo" />
+        <img className="mobile-logo" src="/img/home-logo.png" alt="Logo" />
 
   <button className="menu-toggle">
     <span></span>
@@ -35,13 +34,13 @@ export default function Home() {
     </div>
 
     <div className="align-logo-main-content">
-      <img className="home-vector" src="../img/home-vector.png" alt="Home Vector"/>
+      <img className="home-vector" src="/img/home-vector.png" alt="Home Vector"/>
 
       <div className="hero-image-container">
-        <img className="home-image" src="../img/home-img.png" alt="Hero Image"/>
+        <Image src={HomeImg} alt="Hero Image" className="home-image"/>
       </div>
 
-      <img className="logo" src="../img/meisie-logo.png" alt="Logo"/>
+      <img className="logo" src="/img/meisie-logo.png" alt="Logo"/>
 
       <div id="main-content">
         <div className="home-text-container">
@@ -64,7 +63,7 @@ export default function Home() {
         <div className="box-container">
           <div className="box">
             <div className="half-circle"></div>
-            <img src="../img/connect-vector.png" className="icon"/>
+            <img src="/img/connect-vector.png" className="icon"/>
             <div className="box-text">
               <p className="box-title">Authentic Connections</p>
               <p>Build meaningful relationships with women who understand and support your vision.</p>
@@ -73,7 +72,7 @@ export default function Home() {
 
           <div className="box">
             <div className="half-circle"></div>
-            <img src="../img/up-arrow-vector.png" className="icon"/>
+            <img src="/img/up-arrow-vector.png" className="icon"/>
             <div className="box-text">
               <p className="box-title">Career Growth</p>
               <p>Access opportunities and resources to accelerate your professional development.</p>
@@ -82,7 +81,7 @@ export default function Home() {
 
           <div className="box">
             <div className="half-circle"></div>
-            <img src="../img/share-vector.png" className="icon"/>
+            <img src="/img/share-vector.png" className="icon"/>
             <div className="box-text">
               <p className="box-title">Share Knowledge</p>
               <p>Learn from experts, share your expertise, and grow in a collaborative environment.</p>
@@ -91,7 +90,7 @@ export default function Home() {
 
           <div className="box">
             <div className="half-circle"></div>
-            <img src="../img/hand-vector.png" className="icon"/>
+            <img src="/img/hand-vector.png" className="icon"/>
             <div className="box-text">
               <p className="box-title">Safe Space</p>
               <p>A women-only platform where you can be authentic, and bold without judgement.</p>
@@ -104,8 +103,8 @@ export default function Home() {
     <div className="experience-page">
       <div className="experience-container">
         <div className="experience-box">
-          <img src="../img/communities-bg-vector.png" alt="Experience 1" className="experience-bg"/>
-          <img src="../img/experience-img.png" alt="Experience 2" className="experience-image"/>
+          <img src="/img/communities-bg-vector.png" alt="Experience 1" className="experience-bg"/>
+          <img src="/img/experience-img.png" alt="Experience 2" className="experience-image"/>
           <div className="experience-text">
             <h1 className="experience-title">What You'll Experience in Meisie</h1>
             <p className="experience-main-text pb-6">A curated women-only environment designed to help you flourish personally and professionally.</p>
@@ -136,14 +135,14 @@ export default function Home() {
         <div className="footer-brand">
           <div className="footer-logo">
             <div className="logo-text">
-              <img src="../img/footer-logo.png" alt="Logo"/>
+              <img src="/img/footer-logo.png" alt="Logo"/>
             </div>
           </div>
           <div className="social-icons">
-            <img src="../img/twitter-icon.png" alt="Twitter"/>
-            <img src="../img/facebook-icon.png" alt="Facebook"/>
-            <img src="../img/instagram-icon.png" alt="Instagram"/>
-            <img src="../img/linkedin-icon.png" alt="Linkedin"/>
+            <img src="/img/twitter-icon.png" alt="Twitter"/>
+            <img src="/img/facebook-icon.png" alt="Facebook"/>
+            <img src="/img/instagram-icon.png" alt="Instagram"/>
+            <img src="/img/linkedin-icon.png" alt="Linkedin"/>
           </div>
 
           <p className="follow-text">Follow us</p>
