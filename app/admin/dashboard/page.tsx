@@ -167,13 +167,13 @@ export default function SubmissionsDashboard() {
                         {new Date(s.created_at).toLocaleDateString()}
                       </td>
                       <td className="px-4 py-3">
-                        <Button
+                        <button
                           onClick={() => handleDelete(s.id)}
-                          className="rounded-full text-red-500 bg-transparent hover:bg-[#E9B8B2] text-xs font-semibold transition-all"
+                          className="rounded-full text-red-500 bg-transparent py-2 px-2 hover:bg-[#E9B8B2] text-xs font-semibold transition-all"
                           disabled={deletingId === s.id}
                         >
                           {deletingId === s.id ? "Deleting..." : "Delete"}
-                        </Button>
+                        </button>
                       </td>
                     </tr>
                   ))
