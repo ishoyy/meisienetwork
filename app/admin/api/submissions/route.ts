@@ -74,3 +74,28 @@ export async function GET(): Promise<NextResponse> {
     );
   }
 }
+
+// DELETE: remove a submission by id
+export async function DELETE(request: Request): Promise<NextResponse> {
+  try {
+    const db = getDb();
+    const { id } = await request.json();
+
+    if (!id) {
+      return NextResponse.json(
+        { error: "Submission ID is required." },
+        { status: 400 }
+      );
+    }
+
+    await dbRun(db, `DELETE FROM submissions WHERE id = ?`, [id]);
+
+    return NextResponse.json({ success: true }, { status: 200 });
+  } catch (err) {
+    console.error("Submissions DELETE error:", err);
+    return NextResponse.json(
+      { error: "Internal server error." },
+      { status: 500 }
+    );
+  }
+}

@@ -28,6 +28,7 @@ export default function SubmissionsDashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+  const [deletingId, setDeletingId] = useState<number | null>(null);
   const router = useRouter();
   const { data: session, isPending } = authClient.useSession();
   console.log("Session:", session, "Pending:", isPending);
@@ -46,18 +47,36 @@ export default function SubmissionsDashboard() {
       .catch(() => { setError("Failed to load submissions."); setLoading(false); });
   }, []);
 
-  
-  
+  const handleSignOut = async () => {
+    await authClient.signOut();
+    router.push("/admin/login");
+  }
+
+  const handleDelete = async (id: number) => {
+    if (!confirm("Are you sure you want to delete this submission?")) return;
+    setDeletingId(id);
+    try {
+      const res = await fetch("/admin/api/submissions", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id }),
+      });
+      if (!res.ok) throw new Error("Failed to delete");
+      setSubmissions(prev => prev.filter((s: any) => s.id !== id));
+    } catch (err) {
+      console.error("Delete error:", err);
+      alert("Failed to delete submission.");
+    } finally {
+      setDeletingId(null);
+    }
+  }
+
   if (!session) {
     return null; // or a loading spinner
   }
 
   if (isPending) {
     return <p className="p-8 text-gray-500">Loading...</p>;
-  }
-  const handleSignOut = async () => {
-    await authClient.signOut();
-    router.push("/admin/login");
   }
 
   if (loading) return <p className="p-8 text-gray-500">Loading...</p>;
@@ -118,6 +137,7 @@ export default function SubmissionsDashboard() {
                 <th className="px-4 py-3">Occupation</th>
                 <th className="px-4 py-3">Message</th>
                 <th className="px-4 py-3">Date</th>
+                <th className="px-4 py-3">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
@@ -127,7 +147,7 @@ export default function SubmissionsDashboard() {
                 );
                 return filtered.length === 0 ? (
                   <tr>
-                    <td colSpan={6} className="px-4 py-8 text-center text-gray-400">
+                    <td colSpan={7} className="px-4 py-8 text-center text-gray-400">
                       {searchQuery ? `No results for "${searchQuery}".` : "No submissions yet."}
                     </td>
                   </tr>
@@ -143,6 +163,15 @@ export default function SubmissionsDashboard() {
                       <td className="px-4 py-3 text-gray-600 max-w-xs truncate">{s.message}</td>
                       <td className="px-4 py-3 text-gray-400 whitespace-nowrap">
                         {new Date(s.created_at).toLocaleDateString()}
+                      </td>
+                      <td className="px-4 py-3">
+                        <Button 
+                          onClick={() => handleDelete(s.id)} 
+                          className="rounded-full bg-red-500 text-white px-4 py-2 text-xs font-semibold hover:bg-red-600 transition-all"
+                          disabled={deletingId === s.id}
+                        >
+                          {deletingId === s.id ? "Deleting..." : "Delete"}
+                        </Button>
                       </td>
                     </tr>
                   ))
