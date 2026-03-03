@@ -1,7 +1,7 @@
-import { betterAuth } from "better-auth";
+import { betterAuth, isProduction } from "better-auth";
 import BetterSqlite3 from "better-sqlite3";
 import { getResetPasswordEmailHtml } from "./email-template";
-import { FROM_EMAIL, resend } from "./resend";
+import { FROM_EMAIL, getResend } from "./resend";
 import path from "path";
 import fs from "fs";
 
@@ -33,13 +33,21 @@ function createAuth() {
     return betterAuth({
         database: getDb(),
         trustedOrigins: [appBase],
+        baseURL: appBase,
+         advanced: {
+            useSecureCookies: isProduction,
+            cookiePrefix: "meisie",
+            crossSubDomainCookies: {
+                enabled: false,
+            },
+        },
         emailAndPassword: {
             enabled: true,
             sendResetPassword: async ({ user, token }) => {
                 const clientLink = `${appBase}/admin/reset-password?token=${encodeURIComponent(token)}`;
                 try {
                     const emailHtml = getResetPasswordEmailHtml(user.email, clientLink);
-                    const { data, error } = await resend.emails.send({
+                    const { data, error } = await getResend().emails.send({
                         from: FROM_EMAIL,
                         to: user.email,
                         subject: "Password Reset Request",

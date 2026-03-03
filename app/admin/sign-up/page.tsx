@@ -52,14 +52,14 @@ const page = () => {
             });
 
             if (result.error){
-                console.log("Error signing up:", result.error);
+                setError(result.error.message || "Failed to sign up");
             } else {
                setTimeout(() => {
                     router.push("/admin/login");
                 }, 2000);
             }
         }catch(err){
-            console.log("Error signing up:", err);
+            setError("Failed to sign up");
         } finally{
         setLoading(false);
         }

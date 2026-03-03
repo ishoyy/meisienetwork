@@ -1,0 +1,32 @@
+import { config } from "dotenv";
+import path from "path";
+
+// Load .env before importing anything that reads env vars
+config({ path: path.join(process.cwd(), ".env") });
+
+import { getMigrations } from "better-auth/db";
+import { auth } from "../lib/auth";
+
+async function migrate() {
+    try {
+        console.log("Running better-auth migrations...");
+        const { toBeCreated, toBeAdded, runMigrations } = await getMigrations(auth.options);
+        
+        if (toBeCreated.length === 0 && toBeAdded.length === 0) {
+            console.log("✓ No migrations needed — database is up to date");
+            process.exit(0);
+        }
+
+        console.log("Tables to be created:", toBeCreated.map(t => t.table));
+        console.log("Columns to be added:", toBeAdded.map(c => `${c.table}.${c.column}`));
+        
+        await runMigrations();
+        console.log("✓ Migrations complete");
+        process.exit(0);
+    } catch (error) {
+        console.error("Migration failed:", error);
+        process.exit(1);
+    }
+}
+
+migrate();
