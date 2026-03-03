@@ -38,23 +38,11 @@ const LoginForm = () => {
   const router = useRouter();
   const [success, setSuccess] = useState(false);
 
-  // Redirect after a short delay once login succeeds so the loading
-  // state is visible briefly before navigating.
-  useEffect(() => {
-    if (!success) return;
-    const timer = setTimeout(() => {
-      router.push("/admin/dashboard");
-    }, 1500);
-    return () => clearTimeout(timer);
-  }, [success, router]);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError("")
-
-
-
+    setError("");
     setLoading(true);
+
     try {
       const result = await authClient.signIn.email({
         email,
@@ -63,16 +51,17 @@ const LoginForm = () => {
 
       if (result.error) {
         setError(result.error.message || "Failed to sign in");
+        setLoading(false);
       } else {
+        // Keep loading true so button stays disabled during redirect
         setSuccess(true);
+        router.push("/admin/dashboard");
       }
     } catch (err) {
       setError("Failed to sign in");
       console.log("Login error:", err);
-    } finally {
       setLoading(false);
     }
-
   }
 
   return (
