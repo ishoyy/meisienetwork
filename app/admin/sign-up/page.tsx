@@ -18,7 +18,6 @@ import React from 'react'
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import AdminIcon from "../../../public/img/admin-icon.png";
 
 const page = () => {
     const [email, setEmail] = useState("");
@@ -72,13 +71,7 @@ const page = () => {
                 <Card className="w-full max-w-sm shadow-sm">
                         {/* Centered admin icon */}
                         <div className="flex justify-center mt-6">
-                            <Image
-                                src={AdminIcon}
-                                alt="Admin icon"
-                                width={72}
-                                height={72}
-                                className="rounded-full"
-                            />
+                         
                         </div>
                     <CardHeader>
                         <CardTitle className="text-xl">Sign in</CardTitle>
