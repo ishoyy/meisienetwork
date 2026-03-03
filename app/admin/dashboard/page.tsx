@@ -34,11 +34,13 @@ export default function SubmissionsDashboard() {
   console.log("Session:", session, "Pending:", isPending);
 
 
-  useEffect(() => {
-    if (!session && !session) {
-      router.push("/admin/login");
-    }
-  }, [session, isPending, router])
+ useEffect(() => {
+  if (isPending) return; // Still checking session, don't redirect yet
+  if (!session) {
+    router.push("/admin/login");
+  }
+ }, [session, isPending, router]);
+
 
   useEffect(() => {
     fetch("/admin/api/submissions")
@@ -165,9 +167,9 @@ export default function SubmissionsDashboard() {
                         {new Date(s.created_at).toLocaleDateString()}
                       </td>
                       <td className="px-4 py-3">
-                        <Button 
-                          onClick={() => handleDelete(s.id)} 
-                          className="rounded-full text-red-500 px-4 py-2 text-xs font-semibold hover:bg-red-600 transition-all"
+                        <Button
+                          onClick={() => handleDelete(s.id)}
+                          className="rounded-full text-red-500 bg-transparent text-xs font-semibold transition-all"
                           disabled={deletingId === s.id}
                         >
                           {deletingId === s.id ? "Deleting..." : "Delete"}
