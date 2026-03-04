@@ -10,8 +10,6 @@ import { Button } from "@/components/ui/button"
 import { auth } from "@/lib/auth";
 import HomeVector from "../../../public/img/home-vector.png";
 import { IoIosSearch } from "react-icons/io";
-
-
 const quicksand = Quicksand({ subsets: ['latin'], weight: ['300', '400', '500', '700'], display: 'swap' });
 
 interface Submission {
@@ -87,7 +85,6 @@ export default function SubmissionsDashboard() {
   return (
     <div className="relative min-h-screen bg-[#F8F6F5]">
       <Image src={HomeVector} alt="Home Vector" width={300} height={60} className="absolute top-0 left-0 z-0 pointer-events-none" />
-      
       <div className="relative z-10 p-8">
       <div className={`${quicksand.className}   `}>
        

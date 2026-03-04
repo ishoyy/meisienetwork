@@ -153,9 +153,6 @@ export function getResetPasswordEmailHtml(
             </table>
 
             <!-- Sign-off -->
-            <p style="font-size:15px; color:#52525b; margin:0 0 4px; line-height:1.75;">
-              If you have any trouble, contact us <a href="mailto:isha@wouessi.com" style="color:#4B2E38;">here</a>.
-            </p>
             <p style="font-size:15px; font-weight:600; color:#18181b; margin: 8px 0 0;">
               Meisie
             </p>

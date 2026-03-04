@@ -130,14 +130,14 @@ const LoginForm = () => {
             <Card className="w-full max-w-md shadow-none bg-transparent border-none">
               <div className="flex justify-center flex-col items-center">
                 <RiAdminFill className="text-[#4B2E38] mb-4" size={40}></RiAdminFill>
-                                <CardTitle className="text-xl font-semibold">Admin</CardTitle>
+                                <CardTitle className="text-xl font-semibold p-0">Admin</CardTitle>
 
               </div>
               <CardHeader className="text-center">
               </CardHeader>
               <CardContent className="space-y-4">
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="space-y-1">
+                  <div className="space-y-0">
                     <Label className="text-sm font-medium md:text-sm text-gray-700">Email</Label>
                     <Input
                       type="email"

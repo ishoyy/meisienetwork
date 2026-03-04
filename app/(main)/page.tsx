@@ -139,10 +139,10 @@ export default function Home() {
             </div>
           </div>
           <div className="social-icons">
-            <img src="/img/twitter-icon.png" alt="Twitter"/>
-            <img src="/img/facebook-icon.png" alt="Facebook"/>
-            <img src="/img/instagram-icon.png" alt="Instagram"/>
-            <img src="/img/linkedin-icon.png" alt="Linkedin"/>
+            <a href="https://twitter.com/"><img src="/img/twitter-icon.png" alt="Twitter"/></a>
+            <a href="https://www.facebook.com/"><img src="/img/facebook-icon.png" alt="Facebook"/></a>
+            <a href="https://www.instagram.com/meisienetwork/"><img src="/img/instagram-icon.png" alt="Instagram"/></a>
+            <a href="https://www.linkedin.com/"><img src="/img/linkedin-icon.png" alt="Linkedin"/></a>
           </div>
 
           <p className="follow-text">Follow us</p>
@@ -167,7 +167,7 @@ export default function Home() {
 
       <div className="footer-divider"></div>
 
-      <p className="footer-bottom">© 2025 Meisie Network. All Rights Reserved</p>
+      <p className="footer-bottom">© 2026 Meisie Network. All Rights Reserved</p>
     </footer>
   </div>
 

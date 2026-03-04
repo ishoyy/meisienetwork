@@ -17,7 +17,8 @@ import { Label } from "@/components/ui/label";
 import React from 'react'
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
+import { useSearchParams } from "next/navigation";
+import { notFound } from "next/navigation";
 
 const page = () => {
     const [email, setEmail] = useState("");
@@ -26,6 +27,15 @@ const page = () => {
     const [error, setError] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const router = useRouter();
+    const searchParams = useSearchParams();
+
+    const signupToken = process.env.NEXT_PUBLIC_SIGNUP_TOKEN;
+
+    // If no signup token is set, disable the form and show a message
+    const token = searchParams.get("token");
+    if (!signupToken || token !== signupToken) {
+        notFound();
+    }
 
     const handleSubmit = async(e:React.FormEvent) => {
         e.preventDefault();
