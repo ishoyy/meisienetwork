@@ -1,6 +1,9 @@
 // app/admin/api/submissions/route.ts
 import { NextResponse } from "next/server";
 import { getDb } from "@/lib/data/db";
+import { GiMailShirt } from "react-icons/gi";
+import { FROM_EMAIL, getResend } from "@/lib/resend";
+import { getNotificationEmailHtml } from "@/lib/notification-template";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -37,6 +40,7 @@ export async function POST(request: Request): Promise<NextResponse> {
         { error: "All fields are required." },
         { status: 400 }
       );
+
     }
 
     await dbRun(
@@ -44,6 +48,22 @@ export async function POST(request: Request): Promise<NextResponse> {
       `INSERT INTO submissions (name, email, occupation, message) VALUES (?, ?, ?, ?)`,
       [name, email, occupation, message]
     );
+
+    const base = process.env.BETTER_AUTH_URL || process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const loginUrl = `${base.replace(/\/$/, "")}/admin/dashboard`;
+    const emailHtml = getNotificationEmailHtml(name, email, occupation, message, loginUrl);
+
+    // Send email in background so slow/failed email delivery doesn't block the HTTP response
+    getResend()
+      .emails.send({
+        from: FROM_EMAIL,
+        to: "ishoyy.a@gmail.com",
+        subject: "You have a new submission on Meisie Network",
+        html: emailHtml,
+      })
+      .then((resp) => console.log("Resend response:", resp))
+      .catch((emailErr) => console.error("Resend send error:", emailErr));
+
 
     return NextResponse.json({ success: true }, { status: 201 });
   } catch (err) {
@@ -53,6 +73,8 @@ export async function POST(request: Request): Promise<NextResponse> {
       { status: 500 }
     );
   }
+
+
 }
 
 // GET: return all submissions
