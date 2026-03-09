@@ -23,12 +23,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+ 
       <body
         className={`${quicksand.variable} ${geistMono.variable} antialiased`}
+        style={{ backgroundColor: "#f8f6f5", minHeight: "100vh" }}
       >
         {children}
       </body>
-    </html>
   );
 }
