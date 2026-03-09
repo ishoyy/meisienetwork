@@ -4,6 +4,7 @@ import { getDb } from "@/lib/data/db";
 import { GiMailShirt } from "react-icons/gi";
 import { FROM_EMAIL, getResend } from "@/lib/resend";
 import { getNotificationEmailHtml } from "@/lib/notification-template";
+import { admin } from "better-auth/plugins";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -52,12 +53,12 @@ export async function POST(request: Request): Promise<NextResponse> {
     const base = process.env.BETTER_AUTH_URL || process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
     const loginUrl = `${base.replace(/\/$/, "")}/admin/dashboard`;
     const emailHtml = getNotificationEmailHtml(name, email, occupation, message, loginUrl);
-
+    const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "michellbarker3@gmail.com";
     // Send email in background so slow/failed email delivery doesn't block the HTTP response
     getResend()
       .emails.send({
         from: FROM_EMAIL,
-        to: "ishoyy.a@gmail.com",
+        to: ADMIN_EMAIL,
         subject: "You have a new submission on Meisie Network",
         html: emailHtml,
       })
