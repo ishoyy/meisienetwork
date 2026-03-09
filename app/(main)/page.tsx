@@ -155,7 +155,7 @@ export default function Home() {
                 <p className="text-[#e9b8b2] font-bold">Follow Us</p>
                 <div className="social-icons">
 
-                  <a href="https://twitter.com/"><img src="/img/twitter-icon.png" alt="Twitter" /></a>
+              
                   <a href="https://www.facebook.com/meisienetwork"><img src="/img/facebook-icon.png" alt="Facebook" /></a>
                   <a href="https://www.instagram.com/meisienetwork/"><img src="/img/instagram-icon.png" alt="Instagram" /></a>
                   <a href="https://www.tiktok.com/@meisienetwork"><img src="/img/tiktok-icon.png" alt="Linkedin" /></a>
