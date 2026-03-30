@@ -5,7 +5,6 @@ import MenuHandler from "../../public/components/MenuClient";
 import Waitlist from "../../public/components/Waitlist";
 import HomeImg from "../../public/img/home-img.png";
 import { MdEmail } from "react-icons/md";
-import Link from "next/link";
 export default function Home() {
 
   return (
@@ -137,7 +136,7 @@ export default function Home() {
               <div className="footer-brand">
                 <div className="footer-logo">
                   <div className="logo-text">
-                    <img src="/img/footer-logo.png" className="pb-10 sm:pb-0" alt="Logo" />
+                    <img src="/img/footer-logo.png" alt="Logo" />
                   </div>
                 </div>
 
@@ -153,9 +152,9 @@ export default function Home() {
 
               <div className="footer-column">
                 <p className="text-[#e9b8b2] font-bold">Follow Us</p>
-                <div className="social-icons flex justify-center ">
+                <div className="social-icons">
 
-
+              
                   <a href="https://www.facebook.com/meisienetwork"><img src="/img/facebook-icon.png" alt="Facebook" /></a>
                   <a href="https://www.instagram.com/meisienetwork/"><img src="/img/instagram-icon.png" alt="Instagram" /></a>
                   <a href="https://www.tiktok.com/@meisienetwork"><img src="/img/tiktok-icon.png" alt="Linkedin" /></a>
@@ -163,11 +162,8 @@ export default function Home() {
 
               </div>
             </div>
-            <div className="flex justify-between">
-              <p className="privacy-policy font-semibold"><Link href="/privacy-policy">Privacy Policy</Link></p>
+            <p className="credits"><a href="https://wouessi.com">Designed by Wouessi Inc.</a></p>
 
-              <p className="credits"><a href="https://wouessi.com">Designed by Wouessi Inc.</a></p>
-            </div>
             <div className="footer-divider"></div>
 
             <p className="footer-bottom">© 2026 Meisie Network. All Rights Reserved</p>
