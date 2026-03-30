@@ -27,9 +27,9 @@ export default function PrivacyPolicy() {
                     <div className="navigator-header">
                         <nav>
                             <ul className="nav-links">
-                                <Link href="/"><li className="nav-item text-[#4b2e38] block hover:bg-[#e9b8b2] text-left no-underline text-[18px] py-[1.2rem] px-[2rem] font-semibold" data-scroll-to="container" data-close-menu>Home</li></Link>
-                                <Link href="/#main-content-community"><li className="nav-item text-[#4b2e38] block hover:bg-[#e9b8b2] text-left no-underline py-[1.2rem] px-[2rem] text-[18px] font-semibold" data-scroll-to="main-content-community" data-close-menu>Communities</li></Link>
-                                <Link href="/#main-content-waitlist"><li className="nav-item text-[#4b2e38] block hover:bg-[#e9b8b2] text-left no-underline py-[1.2rem] px-[2rem] text-[18px] font-semibold" data-scroll-to="main-content-waitlist" data-close-menu>Winners</li></Link>
+                                <Link href="/"><li className="nav-item text-[#4b2e38] block  text-left no-underline text-[18px] py-[1.2rem] px-[2rem] font-semibold" data-scroll-to="container" data-close-menu>Home</li></Link>
+                                <Link href="/#main-content-community"><li className="nav-item text-[#4b2e38] block  text-left no-underline py-[1.2rem] px-[2rem] text-[18px] font-semibold" data-scroll-to="main-content-community" data-close-menu>Communities</li></Link>
+                                <Link href="/#main-content-waitlist"><li className="nav-item text-[#4b2e38] block  text-left no-underline py-[1.2rem] px-[2rem] text-[18px] font-semibold" data-scroll-to="main-content-waitlist" data-close-menu>Winners</li></Link>
 
 
                             </ul>
