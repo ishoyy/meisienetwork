@@ -1,0 +1,5 @@
+[phases.build]
+cmds = ["mkdir -p /app/lib/data", "npm run build"]
+
+[start]
+cmd = "npm run migrate && npm run start"

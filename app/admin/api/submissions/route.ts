@@ -1,0 +1,124 @@
+// app/admin/api/submissions/route.ts
+import { NextResponse } from "next/server";
+import { getDb } from "@/lib/data/db";
+import { GiMailShirt } from "react-icons/gi";
+import { FROM_EMAIL, getResend } from "@/lib/resend";
+import { getNotificationEmailHtml } from "@/lib/notification-template";
+import { admin } from "better-auth/plugins";
+
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
+// Helper to run a SQL command
+function dbRun(db: any, sql: string, params: unknown[]): Promise<void> {
+  return new Promise((resolve, reject) => {
+    db.run(sql, params, (err: Error | null) => {
+      if (err) reject(err);
+      else resolve();
+    });
+  });
+}
+
+// Helper to run a SQL query that returns all rows
+function dbAll(db: any, sql: string): Promise<unknown[]> {
+  return new Promise((resolve, reject) => {
+    db.all(sql, [], (err: Error | null, rows: unknown[]) => {
+      if (err) reject(err);
+      else resolve(rows);
+    });
+  });
+}
+
+// POST: insert a new submission
+export async function POST(request: Request): Promise<NextResponse> {
+  try {
+    const db = getDb(); //  only initialized at runtime
+
+    const { name, email, occupation, message } = await request.json();
+
+    if (!name || !email || !occupation || !message) {
+      return NextResponse.json(
+        { error: "All fields are required." },
+        { status: 400 }
+      );
+
+    }
+
+    await dbRun(
+      db,
+      `INSERT INTO submissions (name, email, occupation, message) VALUES (?, ?, ?, ?)`,
+      [name, email, occupation, message]
+    );
+
+    const base = process.env.BETTER_AUTH_URL || process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const loginUrl = `${base.replace(/\/$/, "")}/admin/dashboard`;
+    const emailHtml = getNotificationEmailHtml(name, email, occupation, message, loginUrl);
+    const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "michellbarker3@gmail.com";
+    // Send email in background so slow/failed email delivery doesn't block the HTTP response
+    getResend()
+      .emails.send({
+        from: FROM_EMAIL,
+        to: ADMIN_EMAIL,
+        subject: "You have a new submission on Meisie Network",
+        html: emailHtml,
+      })
+      .then((resp) => console.log("Resend response:", resp))
+      .catch((emailErr) => console.error("Resend send error:", emailErr));
+
+
+    return NextResponse.json({ success: true }, { status: 201 });
+  } catch (err) {
+    console.error("Submissions POST error:", err);
+    return NextResponse.json(
+      { error: "Internal server error." },
+      { status: 500 }
+    );
+  }
+
+
+}
+
+// GET: return all submissions
+export async function GET(): Promise<NextResponse> {
+  try {
+    const db = getDb(); // only initialized at runtime
+
+    const rows = await dbAll(
+      db,
+      "SELECT * FROM submissions ORDER BY created_at DESC"
+    );
+
+    return NextResponse.json(rows);
+  } catch (err) {
+    console.error("Submissions GET error:", err);
+    return NextResponse.json(
+      { error: "Internal server error." },
+      { status: 500 }
+    );
+  }
+}
+
+// DELETE: remove a submission by id
+export async function DELETE(request: Request): Promise<NextResponse> {
+  try {
+    const db = getDb();
+    const { id } = await request.json();
+
+    if (!id) {
+      return NextResponse.json(
+        { error: "Submission ID is required." },
+        { status: 400 }
+      );
+    }
+
+    await dbRun(db, `DELETE FROM submissions WHERE id = ?`, [id]);
+
+    return NextResponse.json({ success: true }, { status: 200 });
+  } catch (err) {
+    console.error("Submissions DELETE error:", err);
+    return NextResponse.json(
+      { error: "Internal server error." },
+      { status: 500 }
+    );
+  }
+}
