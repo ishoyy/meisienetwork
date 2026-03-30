@@ -244,7 +244,7 @@ export default function PrivacyPolicy() {
 
                             <div className="footer-column">
                                 <p className="text-[#e9b8b2] font-bold">Follow Us</p>
-                                                <div className="social-icons flex justify-center ">
+                                <div className="social-icons flex justify-center ">
 
 
 
@@ -256,9 +256,10 @@ export default function PrivacyPolicy() {
                             </div>
                         </div>
                         <div className="flex justify-between">
+                            <p className="credits"><a href="https://wouessi.com">Designed by Wouessi Inc.</a></p>
+
                             <p className="privacy-policy font-semibold"><Link href="/privacy-policy">Privacy Policy</Link></p>
 
-                            <p className="credits"><a href="https://wouessi.com">Designed by Wouessi Inc.</a></p>
                         </div>
                         <div className="footer-divider"></div>
 
