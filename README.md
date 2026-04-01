@@ -33,6 +33,7 @@ This project is built with the following libraries and frameworks:
  - ShadCN for forms
  - Resend API for notifications & reset password links
 
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
