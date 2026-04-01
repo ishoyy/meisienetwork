@@ -20,6 +20,19 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+### Built With
+
+This project is built with the following libraries and frameworks:
+
+ - Next.js
+ - TypeScript
+ - HTML, CSS, JS
+ - Better-Auth for login/sign-out/reset-password flow
+ - Tailwind
+ - SQLite for backend
+ - ShadCN for forms
+ - Resend API for notifications & reset password links
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
